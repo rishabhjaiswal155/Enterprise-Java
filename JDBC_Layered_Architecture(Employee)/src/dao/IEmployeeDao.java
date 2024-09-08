@@ -14,4 +14,5 @@ public interface IEmployeeDao {
 	
 	String updateEmpDetails(double increment,String deptName,int empId) throws SQLException;
 
+	String removeEmpDetails(int empId) throws SQLException;
 }

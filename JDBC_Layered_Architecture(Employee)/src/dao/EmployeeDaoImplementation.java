@@ -11,15 +11,17 @@ import java.util.List;
 import pojo.Employee;
 public class EmployeeDaoImplementation implements IEmployeeDao {
 	private Connection cn;
-	private PreparedStatement pst1,pst2,pst3;
+	private PreparedStatement pst1,pst2,pst3,pst4;
 	public EmployeeDaoImplementation() throws SQLException {
 		cn=openConnection();
 		String sql1="select * from my_emp where deptid=? and join_date > ?";
 		String sql2="insert into my_emp values(default,?,?,?,?,?)";
 		String sql3="update my_emp set salary=salary+?,deptid=? where empid=?";
+		String sql4="delete from my_emp where empid=?";
 		pst1=cn.prepareStatement(sql1);
 		pst2=cn.prepareStatement(sql2);
 		pst3=cn.prepareStatement(sql3);
+		pst4=cn.prepareStatement(sql4);
 		System.out.println("EmpDao created.....");
 	}
 	
@@ -59,6 +61,15 @@ public class EmployeeDaoImplementation implements IEmployeeDao {
 		return "Updation failed!!!";
 	}
 	
+	@Override
+	public String removeEmpDetails(int empId) throws SQLException {
+	    pst4.setInt(1, empId);
+	    int updatedcnt=pst4.executeUpdate();
+	    if(updatedcnt==1)
+	    	return "EmpDetalis removed!!";
+		return "EmpDetails deletion failed!";
+	}
+	
 	public void cleanUp() throws SQLException {
 		if(pst1!=null) 
 			pst1.close();
@@ -66,9 +77,13 @@ public class EmployeeDaoImplementation implements IEmployeeDao {
 			pst2.close();
 		if(pst3!=null)
 			pst3.close();
+		if(pst4!=null)
+			pst4.close();
 		System.out.println("EmpDao destroyed.....");	
 		closeConnection();
 	}
+
+	
 
 	
 
