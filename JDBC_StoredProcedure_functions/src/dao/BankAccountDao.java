@@ -4,6 +4,6 @@ import java.sql.SQLException;
 
 public interface BankAccountDao {
 	
-	String transferFunds(int srcId,int destId,double balance) throws SQLException;
+	String transferFunds(int srcId,int destId,double amount) throws SQLException;
 
 }
