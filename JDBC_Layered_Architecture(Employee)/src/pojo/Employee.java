@@ -25,6 +25,15 @@ public class Employee {
 		this.deptName = deptName;
 		this.joinDate = joinDate;
 	}
+	
+	public Employee(String name, String address, double salary, String deptName, Date joinDate) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.salary = salary;
+		this.deptName = deptName;
+		this.joinDate = joinDate;
+	}
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}

@@ -11,11 +11,13 @@ import java.util.List;
 import pojo.Employee;
 public class EmployeeDaoImplementation implements IEmployeeDao {
 	private Connection cn;
-	private PreparedStatement pst1;
+	private PreparedStatement pst1,pst2;
 	public EmployeeDaoImplementation() throws SQLException {
 		cn=openConnection();
-		String sql="select * from my_emp where deptid=? and join_date > ?";
-		pst1=cn.prepareStatement(sql);
+		String sql1="select * from my_emp where deptid=? and join_date > ?";
+		String sql2="insert into my_emp values(default,?,?,?,?,?)";
+		pst1=cn.prepareStatement(sql1);
+		pst2=cn.prepareStatement(sql2);
 		System.out.println("EmpDao created.....");
 	}
 	
@@ -31,11 +33,26 @@ public class EmployeeDaoImplementation implements IEmployeeDao {
 		return emps;
 	}
 	
+	@Override
+	public String insertEmpDetails(Employee employee) throws SQLException {
+		pst2.setString(1,employee.getName());
+		pst2.setString(2,employee.getAddress());
+		pst2.setDouble(3, employee.getSalary());
+		pst2.setString(4, employee.getDeptName());
+		pst2.setDate(5, employee.getJoinDate());
+		int updatedRows=pst2.executeUpdate();
+		if(updatedRows==1)	
+		   return "EmpDetails Insertion successfull!";
+		return "EmpDetails Insertion failed!";
+	}
+
 	public void cleanUp() throws SQLException {
-		if(pst1!=null) {
+		if(pst1!=null) 
 			pst1.close();
-			System.out.println("EmpDao destroyed.....");
-		}
+		if(pst2!=null) 
+			pst2.close();
+		System.out.println("EmpDao destroyed.....");	
 		closeConnection();
 	}
+
 }
