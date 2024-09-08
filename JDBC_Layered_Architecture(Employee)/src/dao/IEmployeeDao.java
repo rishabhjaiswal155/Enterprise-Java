@@ -11,5 +11,7 @@ public interface IEmployeeDao {
 	List<Employee> getEmpDetails(String deptName,Date joinDate) throws SQLException;
 	
 	String insertEmpDetails(Employee employee) throws SQLException;
+	
+	String updateEmpDetails(double increment,String deptName,int empId) throws SQLException;
 
 }
