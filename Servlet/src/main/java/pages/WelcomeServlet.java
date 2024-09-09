@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/hello")
+@WebServlet(value="/hello",loadOnStartup=2)//default loading policy of servlet is lazy i.e loadOnStartup=0
 //class level annotation,meant for WebContainer,processed @dep time
 //purpose:To create mapping between URL pattern and servlet 
 //key:/hello
