@@ -47,7 +47,14 @@ public class LoginServlet extends HttpServlet {
     	  if(authenticatedUser==null)
     		  pw.print("<h1>Invalid login!!!!,Please <a href='login.html'>Retry</a></h1>");
     	  else {
-    		  pw.print("<h1>Login Successfull!!<br> User Details are: "+authenticatedUser+"</h1>");
+    		 // pw.print("<h1>Login Successfull!!<br> User Details are: "+authenticatedUser+"</h1>");
+    	         //role based authorization
+    		  if(authenticatedUser.getRole().equals("CUSTOMER")) {
+    			  response.sendRedirect("topics");
+    		  }else
+    		  {
+    			  response.sendRedirect("admin");
+    		  }
     	  }
        }catch(Exception e) {
     	   throw new ServletException("got exception in doPost of "+getClass(), e);
