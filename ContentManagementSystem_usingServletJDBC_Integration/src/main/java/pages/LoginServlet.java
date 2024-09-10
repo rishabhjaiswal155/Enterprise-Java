@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +49,14 @@ public class LoginServlet extends HttpServlet {
     		  pw.print("<h1>Invalid login!!!!,Please <a href='login.html'>Retry</a></h1>");
     	  else {
     		 // pw.print("<h1>Login Successfull!!<br> User Details are: "+authenticatedUser+"</h1>");
-    	         //role based authorization
+    	      //pw.flush();//causes IllegalStateException when response.sendRedirect() is invoked as printWriter committed. 
+    		 //want to remember the client across request response
+    		  //Create a cookie and add it into response
+    		  Cookie c1=new Cookie("authenticated_user_dtls",authenticatedUser.toString());
+    		  //API of HttpServletResponse public void addCookie()
+    		  response.addCookie(c1);
+    		  //role based authorization
+    		  //API of HttpServletResponse public void sendRedirect()
     		  if(authenticatedUser.getRole().equals("CUSTOMER")) {
     			  response.sendRedirect("topics");
     		  }else
