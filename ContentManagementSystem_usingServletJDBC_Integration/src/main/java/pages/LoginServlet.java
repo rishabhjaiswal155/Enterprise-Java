@@ -8,10 +8,10 @@ import java.io.PrintWriter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDaoImpl;
 import pojos.User;
@@ -50,13 +50,28 @@ public class LoginServlet extends HttpServlet {
     	  else {
     		 // pw.print("<h1>Login Successfull!!<br> User Details are: "+authenticatedUser+"</h1>");
     	      //pw.flush();//causes IllegalStateException when response.sendRedirect() is invoked as printWriter committed. 
-    		 //want to remember the client across request response
+    		 
+    		  //want to remember the client across request response
+    		  
+    		  //Technique 1:plain Cookie based Technique
     		  //Create a cookie and add it into response
-    		  Cookie c1=new Cookie("authenticated_user_dtls",authenticatedUser.toString());
+    		  //Cookie c1=new Cookie("authenticated_user_dtls",authenticatedUser.toString());
     		  //API of HttpServletResponse public void addCookie()
-    		  response.addCookie(c1);
+    		  //response.addCookie(c1);
     		  //role based authorization
     		  //API of HttpServletResponse public void sendRedirect()
+    		  
+    		  //Technique 2:using HttpSession based SesionManagement
+    		  //API of HttpServletRequest
+    		  //HttpSession getSession()
+    		  HttpSession session=request.getSession();
+    		  
+    		  System.out.println("LoginServlet:"+session.isNew());
+    		  System.out.println("JSessionID:"+session.getId());
+    		  //add the attributes into session scope
+    		  //API of HttpSession
+    		  //void setAttribute(String name,Object Value)
+    		  session.setAttribute("client_dtls",authenticatedUser);
     		  if(authenticatedUser.getRole().equals("CUSTOMER")) {
     			  response.sendRedirect("topics");
     		  }else
