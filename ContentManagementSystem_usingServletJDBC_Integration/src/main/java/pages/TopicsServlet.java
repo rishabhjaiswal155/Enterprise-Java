@@ -2,9 +2,8 @@ package pages;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.TopicDaoImpl;
+import pojos.Topic;
 import pojos.User;
 
 /**
@@ -20,21 +21,6 @@ import pojos.User;
 @WebServlet("/topics")
 public class TopicsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see Servlet#init()
-	 */
-	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see Servlet#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -73,9 +59,18 @@ public class TopicsServlet extends HttpServlet {
 
 			User authenticatedUser = (User) hs.getAttribute("client_dtls");
 			if (authenticatedUser != null) {
+				TopicDaoImpl topicdao=(TopicDaoImpl)hs.getAttribute("topic_dao");
 				pw.print("<h2>Your Details:" + authenticatedUser + "</h2>");
+				List<Topic> topics=topicdao.getAllTopics();
+				pw.print("<form action='tutorials'>");
+				for(Topic t:topics)
+				pw.print("<h3><input type='radio' name='tid' value='"+t.getTopicId()+"'/>"+t.getTopicName()+"</h3>");
+				pw.print("<h3><input type='submit' value='Choose A Topic'/></h3>");
+				pw.print("</form>");		
 			} else
 				pw.print("<h2>Your Cookies are Disabled!!!!Kindly Enabled It.....</h2>");
+		}catch(Exception e) {
+			throw new ServletException("got Exception in doGet of "+getClass(), e);
 		}
 	}
 }

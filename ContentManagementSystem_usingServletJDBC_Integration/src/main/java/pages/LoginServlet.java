@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.TopicDaoImpl;
 import dao.UserDaoImpl;
 import pojos.User;
 /**
@@ -21,6 +22,7 @@ import pojos.User;
 @WebServlet(value="/authenticate",loadOnStartup =1)
 public class LoginServlet extends HttpServlet {
 	UserDaoImpl userDao;
+	TopicDaoImpl topicDao;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,6 +33,7 @@ public class LoginServlet extends HttpServlet {
 	try {
 		openConnection();
 		userDao=new UserDaoImpl();
+		topicDao=new TopicDaoImpl();
 	} catch (Exception e) {
 		throw new ServletException("got exception in init of "+getClass(), e);
 	}	
@@ -72,6 +75,8 @@ public class LoginServlet extends HttpServlet {
     		  //API of HttpSession
     		  //void setAttribute(String name,Object Value)
     		  session.setAttribute("client_dtls",authenticatedUser);
+    		  session.setAttribute("user_dao", userDao);
+    		  session.setAttribute("topic_dao",topicDao);
     		  if(authenticatedUser.getRole().equals("CUSTOMER")) {
     			  response.sendRedirect("topics");
     		  }else
@@ -92,6 +97,7 @@ public class LoginServlet extends HttpServlet {
 	public void destroy() {
 		try {
 			userDao.cleanUp();
+			topicDao.cleanUp();
 			closeConnection();
 		} catch (Exception e) {
 		    throw new RuntimeException("got exception in destroy of "+getClass(), e);
