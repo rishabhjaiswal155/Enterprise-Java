@@ -11,5 +11,6 @@
 <h1>Welcome to JSP...@<%=LocalDateTime.now() %></h1>
 <h2><a href="comments.jsp">Testing Comments</a></h2>
 <h2><a href="login.jsp">Testing Scripting Elements</a></h2>
+<h2><a href="login2.jsp">Testing Scopes</a></h2>
 </body>
 </html>
