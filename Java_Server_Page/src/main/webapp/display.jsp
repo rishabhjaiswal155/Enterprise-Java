@@ -29,5 +29,12 @@ out.print(request.getParameter("em"));%>
 <h3>Your Password:
 <%=request.getParameter("pass")%>
 </h3>
+<h3>Request: <%= request %></h3>
+<h3>Response: <%= response %></h3>
+<h3>Session: <%= session %></h3>
+<h3>Page: <%= page %></h3>
+<h3>Config: <%= config %></h3>
+<h3>PageContext: <%= pageContext %></h3>
+<h3>Application:<%=application %></h3>
 </body>
 </html>
