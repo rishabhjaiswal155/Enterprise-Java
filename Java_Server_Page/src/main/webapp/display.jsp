@@ -38,7 +38,13 @@ out.print(request.getParameter("em"));%>
 <h3>Application:<%=application %></h3>
 <hr/>
 <h2>Userdetails using Expression Language(E.L)</h2>
+<% request.setAttribute("user_dtls", request.getParameter("em")); %>
+<% pageContext.setAttribute("user_dtls", request.getParameter("em")); %>
 <h3>Your Email:${param.em} </h3>
 <h3>Your Password:${param.pass}</h3>
+<h3>UserDetails using requestScope object in E.L</h3>
+<h3>Email: ${requestScope.user_dtls}</h3>
+<h3>UserDetails using pageScope object in E.L</h3>
+<h3>Email: ${pageScope.user_dtls}</h3>
 </body>
 </html>
