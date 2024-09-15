@@ -36,5 +36,9 @@ out.print(request.getParameter("em"));%>
 <h3>Config: <%= config %></h3>
 <h3>PageContext: <%= pageContext %></h3>
 <h3>Application:<%=application %></h3>
+<hr/>
+<h2>Userdetails using Expression Language(E.L)</h2>
+<h3>Your Email:${param.em} </h3>
+<h3>Your Password:${param.pass}</h3>
 </body>
 </html>
