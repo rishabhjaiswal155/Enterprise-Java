@@ -68,7 +68,7 @@ public class TopicsServlet extends HttpServlet {
 				pw.print("<h3><input type='submit' value='Choose A Topic'/></h3>");
 				pw.print("</form>");		
 			} else
-				pw.print("<h2>Your Cookies are Disabled!!!!Kindly Enabled It.....</h2>");
+				pw.print("<h2>Your Cookies are Disabled!!!!Kindly Enabled It.....OR SESSION EXPIRED!!!</h2>");
 		}catch(Exception e) {
 			throw new ServletException("got Exception in doGet of "+getClass(), e);
 		}

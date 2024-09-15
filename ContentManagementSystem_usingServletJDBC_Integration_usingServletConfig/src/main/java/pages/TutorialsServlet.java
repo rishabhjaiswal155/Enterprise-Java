@@ -38,7 +38,7 @@ public class TutorialsServlet extends HttpServlet {
 					pw.print("<h2><a href='tutorialDetails?tutorialName="+s+"'>"+s+"</a></h2>");
 			}
 			else 
-				pw.print("<h2>Cookies Disabled!!!,please Enable it....</h2>");
+				pw.print("<h2>Cookies Disabled!!!,please Enable it....OR SESSION EXPIRED!!!</h2>");
 			
 			
 		}catch(Exception e) {

@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
 			pw.print("<h2>Hii "+authenticateduser.getName()+"</h2>");
 			pw.print("<h2>You are SuccessFully LogOut...</h2>");
 		}else
-			pw.print("<h2>Cookies Disabled!!please Kindly Enable it....</h2>");
+			pw.print("<h2>Cookies Disabled!!please Kindly Enable it....OR SESSION EXPIRED!!!</h2>");
 		session.invalidate();
 		pw.print("<h2><a href='login.html'>Visit Again</a></h2>");
 	}

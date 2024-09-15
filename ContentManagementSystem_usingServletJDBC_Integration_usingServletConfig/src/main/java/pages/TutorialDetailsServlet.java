@@ -39,7 +39,7 @@ public class TutorialDetailsServlet extends HttpServlet {
 				pw.print("<h3><a href='tutorials?tid="+tutorial.getTopicId()+"'>Back</a></h3>");
 				pw.print("<h3><a href='logout'>LogOut</a></h3>");
 			}else
-				pw.print("<h2>Cookies Diabled!!!,please Kindly Enable it....</h2>");
+				pw.print("<h2>Cookies Diabled!!!,please Kindly Enable it....OR SESSION EXPIRED!!!</h2>");
 		}catch(Exception e) {
 			throw new ServletException("got exception in doGet of "+getClass(), e);
 		}
