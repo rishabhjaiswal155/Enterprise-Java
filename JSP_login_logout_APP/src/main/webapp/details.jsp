@@ -10,6 +10,7 @@
 <h1 align="center">JSession ID:${pageContext.session.id}</h1> 
 <h1>valid UserDetails:
 ${sessionScope.user_dtls}
-<br/><a href="logout.jsp">LogOut</a></h1>
+<%String url=response.encodeURL("logout.jsp");%>
+<br/><a href="<%=url%>">LogOut</a></h1>
 </body>
 </html>

@@ -24,7 +24,7 @@ User user=users.get(name);
 if(user!=null){
 	if(user.getPassword().equals(pass)){
 		session.setAttribute("user_dtls", user);
-		response.sendRedirect("details.jsp");
+		response.sendRedirect(response.encodeRedirectURL("details.jsp"));
 	}
 	else{
 		%>
