@@ -11,5 +11,6 @@
 <h1>Welcome to DashBoardApp in JSP</h1>
 <h2><a href="login.jsp">Sign In</a></h2>
 <h2><a href="test1.jsp">Testing Centralized Error Handling</a></h2>
+<h2><a href="test2.jsp">Testing JSP include Directive</a></h2>
 </body>
 </html>
