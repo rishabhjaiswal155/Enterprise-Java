@@ -13,5 +13,6 @@
 <h2><a href="test1.jsp">Testing Centralized Error Handling</a></h2>
 <h2><a href="test2.jsp">Testing JSP include Directive</a></h2>
 <h2><a href="test4.jsp?product_id=101&price=5000">Testing JSP Forward Action</a></h2>
+<h2><a href="test6.jsp?product_id=101&price=5000">Testing JSP include Action</a></h2>
 </body>
 </html>
