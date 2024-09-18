@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,6 @@
 <jsp:useBean id="user" class="beans.UserBean" scope="session" />
 <jsp:setProperty property="*" name="user" />
 <body>
-<jsp:forward page="${sessionScope.user.validateUser()}.jsp"/>
+<c:redirect url="${sessionScope.user.validateUser()}.jsp"/>
 </body>
 </html>
