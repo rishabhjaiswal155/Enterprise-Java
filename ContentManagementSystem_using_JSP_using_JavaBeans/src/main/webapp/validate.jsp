@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Validate</title>
 </head>
-<jsp:useBean id="user" class="beans.UserBean" scope="session" />
 <jsp:setProperty property="*" name="user" />
 <body>
 <c:redirect url="${sessionScope.user.validateUser()}.jsp"/>

@@ -6,8 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
+<jsp:useBean id="user" class="beans.UserBean" scope="session" />
+<jsp:useBean id="topic" class="beans.TopicBean" scope="session"/>
+<jsp:useBean id="tutorial" class="beans.TutorialBean" scope="session"/>
 <body>
-<h1 style=color:red;>${sessionScope.user.message}</h1>
+<h1 style="color:red;">${sessionScope.user.message}</h1>
  <form action="validate.jsp" method="post">
       <table style="background-color: lightgrey; margin: auto">
         <tr>
