@@ -13,13 +13,14 @@ import pojos.Tutorial;
 
 public class TutorialDaoImpl implements ITutorialDao {
 	private Connection cn;
-	private PreparedStatement pst1, pst2, pst3;
+	private PreparedStatement pst1, pst2, pst3,pst4;
 
 	public TutorialDaoImpl() throws SQLException {
 		cn = getCn();
 		pst1 = cn.prepareStatement("select name from tutorials where topic_id=?");
 		pst2 = cn.prepareStatement("select * from tutorials where name=?");
 		pst3 = cn.prepareStatement("update tutorials set visits=visits+1 where name=?");
+		pst4=cn.prepareStatement("insert into tutorials values (default,?,?,?,?,?,?)");
 		System.out.println("TutorialDao created....");
 	}
 
@@ -64,5 +65,19 @@ public class TutorialDaoImpl implements ITutorialDao {
 			pst3.close();
 		System.out.println("TutorialDao cleaned Up....");
 	}
+
+	@Override
+	public String addNewTutorial(Tutorial tutorial) throws SQLException {
+		pst4.setString(1,tutorial.getTutorialName());
+		pst4.setString(2,tutorial.getAuthor());
+		pst4.setDate(3, tutorial.getPublishDate());
+		pst4.setInt(4, 0);
+		pst4.setString(5, tutorial.getContents());
+		pst4.setInt(6, tutorial.getTopicId());
+		int updatedCnt=pst4.executeUpdate();
+		if(updatedCnt==1)
+			return "Tutorial Added SuccessFully";
+		return "Tutorial insertion failed!!!";
+		}
 
 }

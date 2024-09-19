@@ -25,6 +25,15 @@ public class Tutorial {
 		this.contents = contents;
 		this.topicId = topicId;
 	}
+	
+	public Tutorial(String tutorialName, String author, Date publishDate, String contents,int topicId) {
+		super();
+		this.tutorialName = tutorialName;
+		this.author = author;
+		this.publishDate = publishDate;
+		this.contents = contents;
+		this.topicId=topicId;
+	}
 	public int getTutorialId() {
 		return tutorialId;
 	}
