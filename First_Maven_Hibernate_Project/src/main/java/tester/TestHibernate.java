@@ -5,7 +5,7 @@ public class TestHibernate {
 
 	public static void main(String[] args) {
 		try(SessionFactory sf=getSf()){
-			System.out.println("Hibernate Up and Running");
+			System.out.println("Hibernate Up and Running "+sf);
 		}//sf.close(); database connection pooled out
 		catch(Exception e) {
 			e.printStackTrace();
