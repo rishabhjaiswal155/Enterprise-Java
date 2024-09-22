@@ -55,4 +55,20 @@ public class UserDaoImpl implements IUserDao {
 		return msg;
 	}
 
+	@Override
+	public User getUserDetailsbyId(int userId) {
+		User user=null;//state:Transient
+		Session session=getSf().getCurrentSession();//create the empty  L1 cache
+		Transaction tx=session.beginTransaction();
+		try {
+			user=(User)session.get(User.class,userId);//State:persistent
+			tx.commit();//Automatic dirty checking ---->session closed and destroys the L1 cache
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();//session closed and destroys the L1 cache
+			throw e;
+		}
+		return user;//state:Detached
+	}
+
 }
