@@ -1,6 +1,16 @@
 package pojos;
-import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 @Entity//Mandatory class level
 @Table(name="users_tbl") //optional but recommended
 public class User {
@@ -24,12 +34,26 @@ public class User {
 	@Column(name = "reg_amt")
 	private double regAmount;
 	@Column(name = "reg_date")
-	private Date regDate;
+	private LocalDate regDate;
 	@Lob //tell hibernates that it is large object
 	private byte[] image;
 	public User() {
 	System.out.println("in User default ctr");
 	}
+	
+	public User(String firstName, String lastName, String email, String password, String confirmPassword, Role userRole,
+			double regAmount, LocalDate regDate) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.userRole = userRole;
+		this.regAmount = regAmount;
+		this.regDate = regDate;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -72,10 +96,10 @@ public class User {
 	public void setRegAmount(double regAmount) {
 		this.regAmount = regAmount;
 	}
-	public Date getRegDate() {
+	public LocalDate getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(LocalDate regDate) {
 		this.regDate = regDate;
 	}
 	@Override
