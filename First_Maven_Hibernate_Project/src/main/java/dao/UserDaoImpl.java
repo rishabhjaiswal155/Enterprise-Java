@@ -2,6 +2,9 @@ package dao;
 
 import pojos.User;
 import static utils.HibernateUtils.*;
+
+import java.util.List;
+
 import org.hibernate.*;
 public class UserDaoImpl implements IUserDao {
 
@@ -61,6 +64,9 @@ public class UserDaoImpl implements IUserDao {
 		Session session=getSf().getCurrentSession();//create the empty  L1 cache
 		Transaction tx=session.beginTransaction();
 		try {
+			user=(User)session.get(User.class,userId);
+			user=(User)session.get(User.class,userId);
+			user=(User)session.get(User.class,userId);
 			user=(User)session.get(User.class,userId);//State:persistent
 			tx.commit();//Automatic dirty checking ---->session closed and destroys the L1 cache
 		}catch(RuntimeException e) {
@@ -69,6 +75,22 @@ public class UserDaoImpl implements IUserDao {
 			throw e;
 		}
 		return user;//state:Detached
+	}
+
+	@Override
+	public List<User> getAllUserDetails() {
+		List<User> users=null;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select u from User u";
+			users=session.createQuery(jpql,User.class).getResultList();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+		}
+		return users;
 	}
 
 }
