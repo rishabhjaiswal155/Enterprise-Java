@@ -48,10 +48,15 @@ public class UserDaoImpl implements IUserDao {
 			//Save vs persist
 			//Integer id=(Integer)session.save(user);
 			//session.persist(user);
-			session.saveOrUpdate(user);
+			
+			//saveOrUpdate():
+			//session.saveOrUpdate(user);
+			
+			//merge()
+			User newuser=(User)session.merge(user);
 			tx.commit();
 		    //msg="User Details Inserted Successfully!!"+id;
-			msg="User Details Inserted Successfully!!"+user.getUserId();
+			msg="User Details Inserted Successfully!!"+newuser.getUserId();
 			System.out.println("is open "+session.isOpen()+" and connected to DB "+session.isConnected());//false false
 		}catch(RuntimeException e) {
 			if(tx!=null) {
