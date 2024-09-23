@@ -157,6 +157,23 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return names;
 	}
+
+	@Override
+	public List<User> getSelectedProjectionByDateAndRole(LocalDate start, LocalDate end, Role role) {
+		List<User> users;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select new pojos.User(u.lastName,u.regAmount,u.regDate) from User u where u.regDate between :strt_date and :end_date and u.userRole=:role";
+			users=session.createQuery(jpql, User.class).setParameter("strt_date", start).setParameter("end_date",end).setParameter("role", role).getResultList();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return users;
+	}
 	
 
 }

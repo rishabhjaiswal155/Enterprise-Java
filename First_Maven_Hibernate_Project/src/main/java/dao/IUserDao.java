@@ -14,4 +14,5 @@ public interface IUserDao {
 	List<User> getAllUserDetailsByDateAndRole(LocalDate start,LocalDate end,Role role);
     User userLogin(String email,String password);
     List<String> getAllUserFirstNameRegisterAfterDate(LocalDate date);
+    List<User> getSelectedProjectionByDateAndRole(LocalDate start,LocalDate end,Role role);
 }
