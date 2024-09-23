@@ -122,4 +122,24 @@ public class UserDaoImpl implements IUserDao {
 		return users;
 	}
 
+	@Override
+	public User userLogin(String email, String password) {
+		User user;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select u from User u where u.email=:email and u.password=:password";
+			user=session.createQuery(jpql, User.class).setParameter("email", email).setParameter("password",password).getSingleResult();
+			tx.commit();
+			System.out.println(user.getFirstName()+" Login Successfully!!!");
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			System.out.println("Login failed!!!");
+			throw e;
+		}
+		return user;
+	}
+	
+
 }
