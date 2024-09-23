@@ -15,4 +15,5 @@ public interface IUserDao {
     User userLogin(String email,String password);
     List<String> getAllUserFirstNameRegisterAfterDate(LocalDate date);
     List<User> getSelectedProjectionByDateAndRole(LocalDate start,LocalDate end,Role role);
+    String changePasswordByUserId(int userId,String newPassword);
 }

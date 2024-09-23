@@ -174,6 +174,29 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return users;
 	}
-	
 
+	@Override
+	public String changePasswordByUserId(int userId, String newPassword) {
+		User user=null;
+		String msg="Password updation failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			 user=session.get(User.class, userId);//state:persistent
+			if(user!=null) {
+				user.setPassword(newPassword);
+				//changing the state of Persistent entity
+				 msg="Password changed Successfully of "+user.getFirstName();
+			}
+			else
+			  System.out.println("Invalid UserId ");
+			tx.commit();//Automatic dirty checking--->update query----->destroys L1 cache---->cn rets to pool----->session.close();	       
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		user.setPassword("14568");//changing state of Detached entity
+		return msg;
+	}
 }
