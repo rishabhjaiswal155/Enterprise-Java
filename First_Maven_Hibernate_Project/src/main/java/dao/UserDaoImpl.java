@@ -140,6 +140,23 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return user;
 	}
+
+	@Override
+	public List<String> getAllUserFirstNameRegisterAfterDate(LocalDate date) {
+		List<String> names;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select u.firstName from User u where u.regDate>:date";
+			names=session.createQuery(jpql,String.class).setParameter("date", date).getResultList();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return names;
+	}
 	
 
 }

@@ -13,4 +13,5 @@ public interface IUserDao {
 	List<User> getAllUserDetails();
 	List<User> getAllUserDetailsByDateAndRole(LocalDate start,LocalDate end,Role role);
     User userLogin(String email,String password);
+    List<String> getAllUserFirstNameRegisterAfterDate(LocalDate date);
 }
