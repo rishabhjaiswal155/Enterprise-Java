@@ -1,8 +1,10 @@
 package dao;
 
+import pojos.Role;
 import pojos.User;
 import static utils.HibernateUtils.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.*;
@@ -99,6 +101,23 @@ public class UserDaoImpl implements IUserDao {
 		}catch(RuntimeException e) {
 			if(tx!=null)
 				tx.rollback();
+		}
+		return users;
+	}
+
+	@Override
+	public List<User> getAllUserDetailsByDateAndRole(LocalDate start, LocalDate end, Role role) {
+		List<User> users=null;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select u from User u where u.regDate between :strt_date and :end_date and u.userRole=:role";
+			users=session.createQuery(jpql, User.class).setParameter("strt_date", start).setParameter("end_date", end).setParameter("role", role).getResultList();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
 		}
 		return users;
 	}
