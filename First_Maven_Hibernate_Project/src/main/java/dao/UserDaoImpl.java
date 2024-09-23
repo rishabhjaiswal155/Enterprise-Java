@@ -47,7 +47,8 @@ public class UserDaoImpl implements IUserDao {
 		try {
 			//Save vs persist
 			//Integer id=(Integer)session.save(user);
-			session.persist(user);
+			//session.persist(user);
+			session.saveOrUpdate(user);
 			tx.commit();
 		    //msg="User Details Inserted Successfully!!"+id;
 			msg="User Details Inserted Successfully!!"+user.getUserId();
