@@ -15,7 +15,10 @@ public class UserRegistrationusinggetCurrentSession {
 		try(SessionFactory sf=getSf();Scanner sc=new Scanner(System.in)){
 			UserDaoImpl userDao=new UserDaoImpl();
 			System.out.println("Enter User Details: firstName,lastName,email,password,confirm password,userRole,regAmount,regDate(yr-mon-day)");
-			System.out.println(userDao.addNewUserwithgetCurrentSession(new User(sc.next(), sc.next(), sc.next(), sc.next(), sc.next(), Role.valueOf(sc.next().toUpperCase()), sc.nextDouble(),LocalDate.parse(sc.next()))));
+			User transientUser=new User(sc.next(), sc.next(), sc.next(), sc.next(), sc.next(), Role.valueOf(sc.next().toUpperCase()), sc.nextDouble(),LocalDate.parse(sc.next()));
+			System.out.println("userId of transientUser:"+transientUser.getUserId());
+			transientUser.setUserId(199);
+			System.out.println(userDao.addNewUserwithgetCurrentSession(transientUser));
 		}catch(RuntimeException e) {
 			e.printStackTrace();
 		}

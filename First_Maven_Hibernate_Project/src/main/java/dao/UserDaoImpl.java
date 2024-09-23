@@ -37,7 +37,7 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public String addNewUserwithgetCurrentSession(User user) {
-		String msg="User Details Inserted Successfully!!";
+		String msg=null;
 		//get the session using getCurrentSession
 		Session session=getSf().getCurrentSession();
 		Session session1=getSf().getCurrentSession();
@@ -45,8 +45,9 @@ public class UserDaoImpl implements IUserDao {
 		Transaction tx=session.beginTransaction();
 		System.out.println("is open "+session.isOpen()+" and connected to DB "+session.isConnected());//true true
 		try {
-			session.save(user);
+			Integer id=(Integer)session.save(user);
 			tx.commit();
+		    msg="User Details Inserted Successfully!!"+id;
 			System.out.println("is open "+session.isOpen()+" and connected to DB "+session.isConnected());//false false
 		}catch(RuntimeException e) {
 			if(tx!=null) {
