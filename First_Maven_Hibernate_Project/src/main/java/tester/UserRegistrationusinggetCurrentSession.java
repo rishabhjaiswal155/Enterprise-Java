@@ -17,7 +17,7 @@ public class UserRegistrationusinggetCurrentSession {
 			System.out.println("Enter User Details: firstName,lastName,email,password,confirm password,userRole,regAmount,regDate(yr-mon-day)");
 			User transientUser=new User(sc.next(), sc.next(), sc.next(), sc.next(), sc.next(), Role.valueOf(sc.next().toUpperCase()), sc.nextDouble(),LocalDate.parse(sc.next()));
 			System.out.println("userId of transientUser:"+transientUser.getUserId());
-			transientUser.setUserId(199);
+			//transientUser.setUserId(199);
 			System.out.println(userDao.addNewUserwithgetCurrentSession(transientUser));
 		}catch(RuntimeException e) {
 			e.printStackTrace();

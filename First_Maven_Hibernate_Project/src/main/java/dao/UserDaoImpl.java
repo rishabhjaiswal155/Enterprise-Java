@@ -45,14 +45,17 @@ public class UserDaoImpl implements IUserDao {
 		Transaction tx=session.beginTransaction();
 		System.out.println("is open "+session.isOpen()+" and connected to DB "+session.isConnected());//true true
 		try {
-			Integer id=(Integer)session.save(user);
+			//Save vs persist
+			//Integer id=(Integer)session.save(user);
+			session.persist(user);
 			tx.commit();
-		    msg="User Details Inserted Successfully!!"+id;
+		    //msg="User Details Inserted Successfully!!"+id;
+			msg="User Details Inserted Successfully!!"+user.getUserId();
 			System.out.println("is open "+session.isOpen()+" and connected to DB "+session.isConnected());//false false
 		}catch(RuntimeException e) {
 			if(tx!=null) {
 				tx.rollback();
-			msg="User details insertion failed!!";
+			msg="User details insertion failed!!"+user.getUserId();
 			throw e;
 			}
 		}
