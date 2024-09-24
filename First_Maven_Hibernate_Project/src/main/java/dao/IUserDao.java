@@ -17,4 +17,5 @@ public interface IUserDao {
     List<User> getSelectedProjectionByDateAndRole(LocalDate start,LocalDate end,Role role);
     String changePasswordByUserId(int userId,String newPassword);
     String applyDiscountByDate(double discountAmt,LocalDate date);
+    String applyDiscountByDateBulkUpdate(double discountAmt,LocalDate date);
 }

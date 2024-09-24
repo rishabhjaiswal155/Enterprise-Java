@@ -221,4 +221,22 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return msg;
 	}
+
+	@Override
+	public String applyDiscountByDateBulkUpdate(double discountAmt, LocalDate date) {
+		String msg="Applying Discount failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="update User u set u.regAmount=u.regAmount-:discAmt where u.regDate<:dt";
+			int updatedCnt=session.createQuery(jpql).setParameter("discAmt", discountAmt).setParameter("dt", date).executeUpdate();
+			msg= "Discount Applied Successfully!!! for"+updatedCnt+" users";
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
 }
