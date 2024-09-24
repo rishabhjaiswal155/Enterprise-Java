@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface IUserDao {
     String applyDiscountByDateBulkUpdate(double discountAmt,LocalDate date);
     String unsubscribeUser(String email);
     String deleteAllUsersByDate(LocalDate date);
+    String storeImageByUserid(int userId,String imagePath) throws IOException;
 }

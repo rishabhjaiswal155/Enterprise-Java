@@ -1,13 +1,18 @@
 package dao;
 
-import pojos.Role;
-import pojos.User;
-import static utils.HibernateUtils.*;
+import static utils.HibernateUtils.getSf;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.*;
+import org.apache.commons.io.FileUtils;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import pojos.Role;
+import pojos.User;
 public class UserDaoImpl implements IUserDao {
 
 	@Override
@@ -276,5 +281,31 @@ public class UserDaoImpl implements IUserDao {
 			throw e;
 		}
 		return msg;
+	}
+
+	@Override
+	public String storeImageByUserid(int userId, String imagePath) throws IOException {
+		User user;
+		StringBuilder sb=new StringBuilder("Image Storing: ");
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			user=session.get(User.class, userId);
+			if(user!=null) {
+				File path=new File(imagePath);
+				if(path.isFile() && path.canRead()) {
+					user.setImage(FileUtils.readFileToByteArray(path));
+					sb.append("Successfull!! for "+user.getFirstName());
+				}else
+					sb.append("failed due to invalid imagepath name!!");
+			}else
+				sb.append("failed Due to Invalid Userid");
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return sb.toString();
 	}
 }

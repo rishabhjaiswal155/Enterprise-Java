@@ -110,8 +110,14 @@ public class User {
 	public void setRegDate(LocalDate regDate) {
 		this.regDate = regDate;
 	}
-	
-	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	public User(String lastName, double regAmount, LocalDate regDate) {
 		super();
 		this.lastName = lastName;
