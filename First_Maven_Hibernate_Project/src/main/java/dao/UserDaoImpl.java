@@ -308,4 +308,26 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return sb.toString();
 	}
+
+	@Override
+	public String restoreImageByUserid(int userId, String imagePath) throws IOException {
+		User user;
+		StringBuilder sb=new StringBuilder("Image Restoring: ");
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			user=session.get(User.class, userId);
+			if(user!=null) {
+				FileUtils.writeByteArrayToFile(new File(imagePath),user.getImage());
+					sb.append("Successfull!! for "+user.getFirstName());
+				}else
+				sb.append("failed Due to Invalid Userid");
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return sb.toString();
+	}
 }

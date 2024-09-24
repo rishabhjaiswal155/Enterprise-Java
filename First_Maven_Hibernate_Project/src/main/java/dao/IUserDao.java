@@ -22,4 +22,5 @@ public interface IUserDao {
     String unsubscribeUser(String email);
     String deleteAllUsersByDate(LocalDate date);
     String storeImageByUserid(int userId,String imagePath) throws IOException;
+    String restoreImageByUserid(int userId,String imagePath) throws IOException;
 }
