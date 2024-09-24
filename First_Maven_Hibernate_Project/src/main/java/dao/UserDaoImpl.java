@@ -259,4 +259,22 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return msg;
 	}
+
+	@Override
+	public String deleteAllUsersByDate(LocalDate date) {
+		String msg="Unsubscribing all Users failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="delete from User u where u.regDate >:dt";
+			int updatedCnt=session.createQuery(jpql).setParameter("dt", date).executeUpdate();
+			msg="Unsubscribed successfully!! for "+updatedCnt+" users";
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
 }

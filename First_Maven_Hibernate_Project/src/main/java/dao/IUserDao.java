@@ -19,4 +19,5 @@ public interface IUserDao {
     String applyDiscountByDate(double discountAmt,LocalDate date);
     String applyDiscountByDateBulkUpdate(double discountAmt,LocalDate date);
     String unsubscribeUser(String email);
+    String deleteAllUsersByDate(LocalDate date);
 }
