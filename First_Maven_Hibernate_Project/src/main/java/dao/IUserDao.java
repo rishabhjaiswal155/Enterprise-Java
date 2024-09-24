@@ -18,4 +18,5 @@ public interface IUserDao {
     String changePasswordByUserId(int userId,String newPassword);
     String applyDiscountByDate(double discountAmt,LocalDate date);
     String applyDiscountByDateBulkUpdate(double discountAmt,LocalDate date);
+    String unsubscribeUser(String email);
 }

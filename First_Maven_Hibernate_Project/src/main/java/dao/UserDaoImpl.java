@@ -239,4 +239,24 @@ public class UserDaoImpl implements IUserDao {
 		}
 		return msg;
 	}
+
+	@Override
+	public String unsubscribeUser(String email) {
+		User user;
+		String msg="Failed to Unsubscribe!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select u from User u where u.email=:em";
+			user=session.createQuery(jpql, User.class).setParameter("em", email).getSingleResult();
+			session.delete(user);
+			msg="Unsubscribe Successfully! "+user.getFirstName();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
 }
