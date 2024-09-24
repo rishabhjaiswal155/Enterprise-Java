@@ -199,4 +199,26 @@ public class UserDaoImpl implements IUserDao {
 		user.setPassword("14568");//changing state of Detached entity
 		return msg;
 	}
+
+	@Override
+	public String applyDiscountByDate(double discountAmt, LocalDate date) {
+		List<User> users;
+		String msg="Applying Discount failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			  String jpql="select u from User u where u.regDate<:dt";
+			  users= session.createQuery(jpql, User.class).setParameter("dt", date).getResultList();
+			  if(users!=null) {
+			  users.forEach(i->i.setRegAmount(i.getRegAmount()-discountAmt));
+			  msg="Applying Discount Successfull!!!";
+			  }
+			  tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
 }
