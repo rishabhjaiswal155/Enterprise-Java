@@ -73,4 +73,20 @@ public class TutorialDaoImpl implements ITutorialDao {
 		return tutorial;	
 	}
 
+	@Override
+	public List<Tutorial> FetchTutorialByName(String topicName) {
+		List<Tutorial> tutorial;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+		      String jpql="select t from Tutorial t where t.topic.topicName=:tname";
+		      tutorial=session.createQuery(jpql,Tutorial.class).setParameter("tname", topicName).getResultList();
+		       tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return tutorial;	
+	}
 }
