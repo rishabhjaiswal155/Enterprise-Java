@@ -49,7 +49,7 @@ public class User extends BaseEntity{
 	}
 	@Override
 	public String toString() {
-		return "UserId="+getId()+"firstName=" + firstName + ", lastName=" + lastName + ", email=" + email;
+		return "UserId="+getId()+",firstName=" + firstName + ", lastName=" + lastName + ", email=" + email;
 	}
 	
 

@@ -24,7 +24,7 @@ public class Topic extends BaseEntity{
 	}
 	@Override
 	public String toString() {
-		return "Topicid="+getId()+"topicName=" + topicName;
+		return "Topicid="+getId()+",topicName=" + topicName;
 	}
 	
 	

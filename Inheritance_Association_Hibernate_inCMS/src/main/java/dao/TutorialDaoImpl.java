@@ -2,6 +2,8 @@ package dao;
 
 import static utils.HibernateUtils.getSf;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,7 +28,7 @@ public class TutorialDaoImpl implements ITutorialDao {
 				tutorial.setTopic(topic);
 				System.out.println(tutorial.getAuthor()+" "+tutorial.getTopic());
 				session.persist(tutorial);
-				msg="Tutorial added successfully! with authorId="+authorId+"and topicId="+topicId;
+				msg="Tutorial added successfully! with authorId="+authorId+" and topicId="+topicId;
 			}
 			tx.commit();
 		}catch(RuntimeException e) {
@@ -35,6 +37,23 @@ public class TutorialDaoImpl implements ITutorialDao {
 			throw e;
 		}
 		return msg;
+	}
+
+	@Override
+	public List<Tutorial> getAllTutorials() {
+		List<Tutorial> tutorial;
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			String jpql="select t from Tutorial t";
+			tutorial=session.createQuery(jpql, Tutorial.class).getResultList();
+		   tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return tutorial;
 	}
 
 }

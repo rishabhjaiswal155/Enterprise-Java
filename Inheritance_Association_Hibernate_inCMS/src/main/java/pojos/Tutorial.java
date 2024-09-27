@@ -11,10 +11,10 @@ private int visits;
 private LocalDate publishDate;
 @Column(length = 100)
 private String contents;
-@ManyToOne
+@ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name="topic_id",nullable=false)
 private Topic topic;
-@ManyToOne
+@ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name="author_id",nullable=false)
 private User author;
 public Tutorial() {
@@ -52,22 +52,25 @@ public String getContents() {
 public void setContents(String contents) {
 	this.contents = contents;
 }
+
 public Topic getTopic() {
 	return topic;
 }
+
 public void setTopic(Topic topic) {
 	this.topic = topic;
 }
+
 public User getAuthor() {
 	return author;
 }
+
 public void setAuthor(User author) {
 	this.author = author;
 }
+
 @Override
 public String toString() {
-	return "TutorialId="+getId()+"title=" + title + ", visits=" + visits + ", publishDate=" + publishDate + ", contents=" + contents
-			+ ", topic=" + topic + ", author=" + author;
+	return "TutorialId="+getId()+",title=" + title + ", visits=" + visits + ", publishDate=" + publishDate + ", contents=" + contents;
 }
-
 }
