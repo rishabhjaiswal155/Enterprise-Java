@@ -20,6 +20,14 @@ private User author;
 public Tutorial() {
 	// TODO Auto-generated constructor stub
 }
+
+public Tutorial(String title, LocalDate publishDate, String contents) {
+	super();
+	this.title = title;
+	this.publishDate = publishDate;
+	this.contents = contents;
+}
+
 public String getTitle() {
 	return title;
 }
