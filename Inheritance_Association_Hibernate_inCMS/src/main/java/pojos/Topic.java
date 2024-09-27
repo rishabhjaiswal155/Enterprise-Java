@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="topics")
 public class Topic extends BaseEntity{
-	@Column(name = "topic_name",length=30)
+	@Column(name = "topic_name",length=30,unique=true)
 	private String topicName;
 	public Topic() {
 		// TODO Auto-generated constructor stub
