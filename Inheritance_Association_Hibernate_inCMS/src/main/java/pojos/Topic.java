@@ -10,6 +10,12 @@ public class Topic extends BaseEntity{
 	public Topic() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Topic(String topicName) {
+		super();
+		this.topicName = topicName;
+	}
+
 	public String getTopicName() {
 		return topicName;
 	}
