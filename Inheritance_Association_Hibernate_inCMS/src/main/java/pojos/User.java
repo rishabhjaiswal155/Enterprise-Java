@@ -1,5 +1,13 @@
 package pojos;
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 @Entity
 @Table(name="users")
 public class User extends BaseEntity{
@@ -11,6 +19,9 @@ public class User extends BaseEntity{
 	private String email;
 	@Column(length=20,nullable = false)
 	private String password;
+	@ManyToMany
+	@JoinTable(name="users_role",joinColumns =@JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
+	private Set<Role> roles=new HashSet<>();//reccommended by Gavin King(initialization)
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
@@ -47,6 +58,23 @@ public class User extends BaseEntity{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	//Gavin King recommends to add Helper methods
+	public void addRole(Role role) {
+		roles.add(role);
+	}
+	public void removeRole(Role role) {
+		roles.remove(role);
+	}
+
 	@Override
 	public String toString() {
 		return "UserId="+getId()+",firstName=" + firstName + ", lastName=" + lastName + ", email=" + email;
