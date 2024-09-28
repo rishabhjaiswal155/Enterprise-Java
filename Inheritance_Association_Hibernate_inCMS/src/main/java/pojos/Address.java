@@ -21,6 +21,18 @@ public class Address extends BaseEntity {
     public Address() {
 		// TODO Auto-generated constructor stub
 	}
+    
+	public Address(String addressLine1, String addressLine2, String city, String state, String country,
+			String zipCode) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.zipCode = zipCode;
+	}
+
 	public String getAddressLine1() {
 		return addressLine1;
 	}
