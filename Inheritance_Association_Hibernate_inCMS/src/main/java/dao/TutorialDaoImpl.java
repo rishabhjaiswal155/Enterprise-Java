@@ -79,8 +79,9 @@ public class TutorialDaoImpl implements ITutorialDao {
 		Session session=getSf().getCurrentSession();
 		Transaction tx=session.beginTransaction();
 		try {
-		      String jpql="select t from Tutorial t where t.topic.topicName=:tname";
-		      tutorial=session.createQuery(jpql,Tutorial.class).setParameter("tname", topicName).getResultList();
+		       //String jpql="select t from Tutorial t where t.topic.topicName=:tname";
+		    String jpql="select t from Tutorial t join t.topic tp where tp.topicName=:tname";  
+			tutorial = session.createQuery(jpql, Tutorial.class).setParameter("tname", topicName).getResultList();
 		       tx.commit();
 		}catch(RuntimeException e) {
 			if(tx!=null)
