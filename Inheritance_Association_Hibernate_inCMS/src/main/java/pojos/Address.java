@@ -17,7 +17,8 @@ public class Address extends BaseEntity {
 	private String zipCode;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",nullable=false)
-	private User user;
+	@MapsId
+    private User user;
     public Address() {
 		// TODO Auto-generated constructor stub
 	}
