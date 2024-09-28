@@ -14,7 +14,11 @@ public class FetchTutorailDetailsByTopicName {
 		TutorialDaoImpl tutorialDao=new TutorialDaoImpl();
 		System.out.println("Enter topicName");
 		String topicName=sc.nextLine();
-			tutorialDao.FetchTutorialByName(topicName).forEach(System.out::println);
+			tutorialDao.FetchTutorialByName(topicName).forEach(t->{
+				System.out.println("TutorialDetails:"+t);
+				System.out.println("Topic Details:"+t.getTopic());
+				System.out.println("Author Details:"+t.getAuthor());
+			});
 					}catch(RuntimeException e) {
 			e.printStackTrace();
 		}
