@@ -1,8 +1,12 @@
 package dao;
 
+import static utils.HibernateUtils.getSf;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import pojos.Role;
 import pojos.User;
-import org.hibernate.*;
-import static utils.HibernateUtils.*;
 public class UserDaoImpl implements IUserDao {
 
 	@Override
@@ -13,6 +17,28 @@ public class UserDaoImpl implements IUserDao {
 		try {
 			session.persist(user);
 			msg="New User added successfully!!! with userId "+user.getId();
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
+
+	@Override
+	public String assignUserRoleByUserIdAndRoleId(long userId, long roleId) {
+		String msg="Assigning UserRole Failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			User user=session.get(User.class, userId);
+			Role role=session.get(Role.class, roleId);
+			if(user!=null & role!=null) {
+				user.addRole(role);
+				session.persist(user);
+				msg="UserRole assigning SuccessFull! for User:"+user.getId()+" to Role:"+role.getRoleName();
+			}			
 			tx.commit();
 		}catch(RuntimeException e) {
 			if(tx!=null)
