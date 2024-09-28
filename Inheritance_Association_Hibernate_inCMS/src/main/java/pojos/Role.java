@@ -9,6 +9,12 @@ private UserRole roleName;
 	public Role() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Role(UserRole roleName) {
+		super();
+		this.roleName = roleName;
+	}
+
 	public UserRole getRoleName() {
 		return roleName;
 	}
