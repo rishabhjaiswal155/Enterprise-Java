@@ -22,5 +22,6 @@
 		<mapping class="pojos.User"/>
 		<mapping class="pojos.Topic"/>
 		<mapping class="pojos.Tutorial"/>
+		<mapping class="pojos.Address"/>
 		</session-factory>
 </hibernate-configuration>
