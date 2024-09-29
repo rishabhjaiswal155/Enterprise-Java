@@ -1,12 +1,17 @@
 package pojos;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name="users")
@@ -22,6 +27,8 @@ public class User extends BaseEntity{
 	@ManyToMany
 	@JoinTable(name="users_role",joinColumns =@JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Set<Role> roles=new HashSet<>();//reccommended by Gavin King(initialization)
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "customer",cascade = CascadeType.ALL)
+	private List<Comment> comments=new ArrayList<>();
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
@@ -67,6 +74,15 @@ public class User extends BaseEntity{
 		this.roles = roles;
 	}
 	
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	//Gavin King recommends to add Helper methods
 	public void addRole(Role role) {
 		roles.add(role);

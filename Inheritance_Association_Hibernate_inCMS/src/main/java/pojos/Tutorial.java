@@ -1,6 +1,16 @@
 package pojos;
 import java.time.LocalDate;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 @Entity
 @Table(name="tutorials")
 public class Tutorial extends BaseEntity {
@@ -17,6 +27,8 @@ private Topic topic;
 @ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name="author_id",nullable=false)
 private User author;
+@OneToMany(fetch = FetchType.EAGER,mappedBy = "tutorial",cascade = CascadeType.ALL)
+private List<Comment> comments=new ArrayList<>();
 public Tutorial() {
 	// TODO Auto-generated constructor stub
 }
@@ -67,6 +79,15 @@ public User getAuthor() {
 
 public void setAuthor(User author) {
 	this.author = author;
+}
+
+
+public List<Comment> getComments() {
+	return comments;
+}
+
+public void setComments(List<Comment> comments) {
+	this.comments = comments;
 }
 
 @Override
