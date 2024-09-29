@@ -2,6 +2,8 @@ package dao;
 
 import static utils.HibernateUtils.getSf;
 
+import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -39,6 +41,25 @@ public class UserDaoImpl implements IUserDao {
 				session.persist(user);
 				msg="UserRole assigning SuccessFull! for User:"+user.getId()+" to Role:"+role.getRoleName();
 			}			
+			tx.commit();
+		}catch(RuntimeException e) {
+			if(tx!=null)
+				tx.rollback();
+			throw e;
+		}
+		return msg;
+	}
+
+	@Override
+	public String registerUserWithSetOfRoles(User user, Set<Role> roles) {
+		String msg="Registering User with Collection of Roles failed!!!";
+		Session session=getSf().getCurrentSession();
+		Transaction tx=session.beginTransaction();
+		try {
+			roles.forEach(r->user.addRole(r));
+			System.out.println("Roles:"+user.getRoles());
+			session.persist(user);
+		    msg="Registering User with Collection of Roles SuccessFull!! with userId:"+user.getId()+" and Roles:"+roles;
 			tx.commit();
 		}catch(RuntimeException e) {
 			if(tx!=null)
