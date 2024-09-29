@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +34,9 @@ public class User extends BaseEntity{
 	private List<Comment> comments=new ArrayList<>();
 	@Embedded
 	private Passport passport;
+	@ElementCollection
+	@CollectionTable(name="users_cards",joinColumns = @JoinColumn(name="user_id"))
+	private List<Card> cards=new ArrayList<>();
 	
 	public User() {
 		// TODO Auto-generated constructor stub
