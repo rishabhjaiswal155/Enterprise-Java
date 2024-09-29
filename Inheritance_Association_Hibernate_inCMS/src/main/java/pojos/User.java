@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -29,6 +30,9 @@ public class User extends BaseEntity{
 	private Set<Role> roles=new HashSet<>();//reccommended by Gavin King(initialization)
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "customer",cascade = CascadeType.ALL)
 	private List<Comment> comments=new ArrayList<>();
+	@Embedded
+	private Passport passport;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
