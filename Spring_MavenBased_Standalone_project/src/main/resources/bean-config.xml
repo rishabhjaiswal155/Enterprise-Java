@@ -12,6 +12,8 @@
 <!-- dependent singleton eager -->
 <bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy">
 <!-- Setter based Dependency Injection -->
-<property name="myTransport" ref="soap"/>
+<!-- <property name="myTransport" ref="soap"/> -->
+<!-- constructor based DI -->
+<constructor-arg name="t1234" ref="soap"/>
 </bean>
 </beans>

@@ -5,7 +5,8 @@ import dependency.Transport;
 
 public class ATMImpl implements ATM {
 	private Transport myTransport;//=new HttpTransport();//dep
-	public ATMImpl() {
+	public ATMImpl(Transport t1234) {
+		myTransport=t1234;
 		System.out.println("in cnstr of " +getClass().getName()+" "+myTransport);
 	}
 
@@ -21,18 +22,19 @@ public class ATMImpl implements ATM {
 		byte[] data=("withdrawing "+amt).getBytes();
 		myTransport.informBank(data);
 	}
-	//setter Based Dependency Injection (D.I)
-	public void setMyTransport(Transport myTransport) {
-		this.myTransport = myTransport;
-		System.out.println("in setter "+this.myTransport);
-	}
+//	//setter Based Dependency Injection (D.I)
+//	public void setMyTransport(Transport myTransport) {
+//		this.myTransport = myTransport;
+//		System.out.println("in setter "+this.myTransport);
+//	}
+	
 	//init method
 	public void anyInit() {
-		System.out.println("in init of "+getClass().getName());
+		System.out.println("in init of "+getClass().getName()+" for "+myTransport);
 	}
 	
 	//destroy method
 	public void anyDestroy() {
-		System.out.println("in destroy of "+getClass().getName());
+		System.out.println("in destroy of "+getClass().getName()+" for "+myTransport);
 	}
 }
