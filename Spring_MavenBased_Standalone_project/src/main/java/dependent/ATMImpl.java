@@ -1,11 +1,12 @@
 package dependent;
 
 
+
 import dependency.Transport;
 
 public class ATMImpl implements ATM {
 	private Transport myTransport;//=new HttpTransport();//dep
-	public ATMImpl(Transport t1234) {
+	private ATMImpl(Transport t1234) {
 		myTransport=t1234;
 		System.out.println("in cnstr of " +getClass().getName()+" "+myTransport);
 	}
@@ -36,5 +37,10 @@ public class ATMImpl implements ATM {
 	//destroy method
 	public void anyDestroy() {
 		System.out.println("in destroy of "+getClass().getName()+" for "+myTransport);
+	}
+	
+	public static ATMImpl myFactory(Transport t123) {
+		System.out.println("in myFactory of "+t123);
+		return new ATMImpl(t123);
 	}
 }

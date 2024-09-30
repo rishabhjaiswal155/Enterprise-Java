@@ -10,10 +10,11 @@
 <!-- Singleton lazy -->
 <bean id="soap" class="dependency.SoapTransport" lazy-init="true"/>
 <!-- dependent singleton eager -->
-<bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy">
+<!-- Factory based Dependency injection -->
+<bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy" factory-method="myFactory">
 <!-- Setter based Dependency Injection -->
 <!-- <property name="myTransport" ref="soap"/> -->
 <!-- constructor based DI -->
-<constructor-arg name="t1234" ref="soap"/>
+<constructor-arg name="t123" ref="soap"/>
 </bean>
 </beans>
