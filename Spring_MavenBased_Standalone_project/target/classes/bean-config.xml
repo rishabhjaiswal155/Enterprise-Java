@@ -10,7 +10,7 @@
 <!-- Singleton lazy -->
 <bean id="soap" class="dependency.SoapTransport" lazy-init="true"/>
 <!-- dependent singleton eager -->
-<bean id="my_atm" class="dependent.ATMImpl">
+<bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy">
 <!-- Setter based Dependency Injection -->
 <property name="myTransport" ref="soap"/>
 </bean>

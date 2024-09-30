@@ -10,7 +10,7 @@ public class TestATM {
 		ATMImpl ref1=new ATMImpl();
 		ref1.setMyTransport(new SoapTransport());
 		ref1.deposit(1000);
-
+		
 	}
 
 }

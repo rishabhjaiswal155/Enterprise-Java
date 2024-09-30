@@ -26,6 +26,13 @@ public class ATMImpl implements ATM {
 		this.myTransport = myTransport;
 		System.out.println("in setter "+this.myTransport);
 	}
+	//init method
+	public void anyInit() {
+		System.out.println("in init of "+getClass().getName());
+	}
 	
-	
+	//destroy method
+	public void anyDestroy() {
+		System.out.println("in destroy of "+getClass().getName());
+	}
 }
