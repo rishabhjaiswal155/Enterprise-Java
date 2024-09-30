@@ -2,4 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- beans dependency configuration -->
+<!-- Singleton eager -->
+<bean id="test" class="dependency.TestTransport"/>
+<!-- Prototype lazy -->
+<bean id="http" class="dependency.HttpTransport" scope="prototype"/>
+<!-- Singleton lazy -->
+<bean id="soap" class="dependency.SoapTransport" lazy-init="true"/>
+<!-- dependent singleton eager -->
+<bean id="my_atm" class="dependent.ATMImpl">
+<!-- Setter based Dependency Injection -->
+<property name="myTransport" ref="soap"/>
+</bean>
 </beans>
