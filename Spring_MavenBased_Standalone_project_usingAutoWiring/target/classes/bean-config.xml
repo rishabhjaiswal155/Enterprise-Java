@@ -3,15 +3,24 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 <!-- beans dependency configuration -->
+
 <!-- Singleton eager -->
-<!-- <bean id="test" class="dependency.TestTransport"/>
-Prototype lazy
-<bean id="http" class="dependency.HttpTransport" scope="prototype"/>
-Singleton lazy -->
+<!-- <bean id="test" class="dependency.TestTransport"/> -->
+
+<!-- Prototype lazy -->
+<!-- <bean id="http" class="dependency.HttpTransport" scope="prototype"/> -->
+
+<!--  Singleton lazy -->
 <bean id="myTransport" class="dependency.SoapTransport" lazy-init="true"/>
+
 <!-- dependent singleton eager -->
 <!-- autowire="byName" -->
 <!-- <bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy" autowire="byName"/>-->
+
 <!-- autowire="byType" -->
-<bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy" autowire="byType"/>
+<!-- <bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy" autowire="byType"/>-->
+
+<!-- autowire="constructor" -->
+<bean id="my_atm" class="dependent.ATMImpl" scope="prototype" init-method="anyInit" destroy-method="anyDestroy" autowire="constructor"/>
+
 </beans>
