@@ -25,5 +25,7 @@
 		<mapping class="pojos.Address"/>
 		<mapping class="pojos.Role"/>
 		<mapping class="pojos.Comment"/>
+		<mapping class="pojos.Tag"/>
+		<mapping class="pojos.TagTutorial"/>
 		</session-factory>
 </hibernate-configuration>
