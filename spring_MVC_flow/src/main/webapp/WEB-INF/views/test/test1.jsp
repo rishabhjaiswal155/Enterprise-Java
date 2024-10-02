@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
+<title>Test1</title>
 </head>
 <body>
-<h1><a href="hello">Test Spring MVC Flow</a></h1>
-<h1><a href="test/test1">Test Model and View(Model Attributes)</a></h1>
+<h1>Server TimeStamp: ${requestScope.server_ts}</h1>
 </body>
 </html>
