@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>Server TimeStamp: ${requestScope.server_ts}</h1>
+<h1>Number List: ${requestScope.num_list}</h1>
 </body>
 </html>
