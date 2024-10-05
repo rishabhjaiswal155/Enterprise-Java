@@ -9,6 +9,6 @@
 </head>
 <body>
 <h1>Welcome to Content Management System Application using Spring Boot</h1>
-<h2><a href="<spring:url value='/user/login'/>">User Login</a></h2>
+<h2><a href="<spring:url  value='/user/login'/>">User Login</a></h2>
 </body>
 </html>

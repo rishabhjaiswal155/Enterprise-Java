@@ -11,7 +11,7 @@
 <body>
 <h1 style="color:green">${requestScope.msg}</h1>
 <h3>Valid User Details under role:${sessionScope.user_dtls.roles}</h3>
-<spring:url  var="url" value="/customer/tutorials"/>
+<spring:url  var="url"  value="/customer/tutorials"/>
 <form action="${url}">
 <h1>Topics List</h1>
 <c:forEach var="t" items="${requestScope.topic_dtls}">
