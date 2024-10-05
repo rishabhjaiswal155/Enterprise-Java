@@ -35,10 +35,10 @@ public String processLoginForm(@RequestParam String email,@RequestParam String p
 	map.addAttribute("msg", "Login Sucessfull");
 	map.addAttribute("user_dtls",authenticateUser);
 	if(authenticateUser.getRoles().contains(new Role(UserRole.ADMIN))) {
-		return "/admin/status";
+		return "redirect:/admin/status";
 	}
 	if(authenticateUser.getRoles().contains(new Role(UserRole.CUSTOMER))) {
-		return "/customer/topics";
+		return "redirect:/customer/topics";
 	}
 	return "/author/success";
 	

@@ -13,7 +13,7 @@ public class Address extends BaseEntity {
 	private String state;
 	@Column(length = 30)
 	private String country;
-	@Column(length = 30)
+	@Column(name="zip_code" ,length = 30)
 	private String zipCode;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",nullable=false)
