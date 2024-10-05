@@ -36,5 +36,13 @@ public class CustomerController {
 		map.addAttribute("tut_names",tutorialService.getAllTutorialTitle(topicId));
 		return "/customer/tutorials";
 	}
+	
+	@GetMapping("/tutorialDetails")
+	public String showTutorialDetails(@RequestParam String tutorialTitle,Model map) {
+		System.out.println("in showTutorialDetails() of "+getClass());
+		map.addAttribute("tut_dtls",tutorialService.getTutorialDetails(tutorialTitle));
+		return "/customer/tutorialDetails";
+	}
+	
 
 }
