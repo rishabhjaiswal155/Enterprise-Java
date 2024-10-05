@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1 style="color:green">${requestScope.msg}</h1>
-<h3>Valid User Details under role:${sessionScope.user_dtls.roles}</h3>
+<h1>Hello:${sessionScope.user_dtls.firstName}</h1>
 <spring:url  var="url"  value="/customer/tutorials"/>
 <form action="${url}">
 <h1>Topics List</h1>

@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,14 @@ public String processLoginForm(@RequestParam String email,@RequestParam String p
 		return "/user/login";
 	}
 	}
+
+@GetMapping("/logout")
+public String showLogOutPage(Model map,HttpSession session,HttpServletResponse resp,HttpServletRequest req) {
+	System.out.println("in showLogOutPage() of "+getClass());
+	map.addAttribute("user_details", session.getAttribute("user_dtls"));
+	session.invalidate();
+	resp.setHeader("refresh","5;URL="+req.getContextPath());
+;	return "/user/logout";
+}
 
 }

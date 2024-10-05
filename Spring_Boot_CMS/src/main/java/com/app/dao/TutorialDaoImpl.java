@@ -19,9 +19,9 @@ public class TutorialDaoImpl implements ITutorialDao {
 		return manager.createQuery(JPQL,String.class).setParameter("tid", topicId).getResultList();
 	}
 	@Override
-	public Tutorial getTutorialDetails(Long tutorialId) {
-		String JPQL="select t from Tutorial t where t.id=:id";
-		return manager.createQuery(JPQL,Tutorial.class).setParameter("id",tutorialId).getSingleResult();
+	public Tutorial getTutorialDetails(String tutorialTitle) {
+		String JPQL="select t from Tutorial t join fetch t.topic tp join fetch t.author a where t.title=:title";
+		return manager.createQuery(JPQL,Tutorial.class).setParameter("title",tutorialTitle).getSingleResult();
 	}
 
 }

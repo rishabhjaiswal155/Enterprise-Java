@@ -21,8 +21,8 @@ public class TutorialServiceImpl implements ITutorialService {
 	}
 
 	@Override
-	public Tutorial getTutorialDetails(Long tutorialId) {
-		Tutorial tutorial=tutorialDao.getTutorialDetails(tutorialId);
+	public Tutorial getTutorialDetails(String tutorialTitle) {
+		Tutorial tutorial=tutorialDao.getTutorialDetails(tutorialTitle);
 		tutorial.setVisits(tutorial.getVisits()+1);
 		return tutorial;
 	}

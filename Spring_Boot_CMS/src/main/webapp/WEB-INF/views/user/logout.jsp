@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>status</title>
+<title>LogOut</title>
 </head>
 <body>
-<h1>In admin status Page....</h1>
-<h1>${requestScope.msg}</h1>
-<h1>Valid User Details under role:${requestScope.user_dtls.roles.roleName}</h1>
+<h1>Hello ${requestScope.user_details.firstName}</h1>
+<h2>You have SucessFully logged out!!!!</h2>
+<h2>You will be redirected to login page....</h2>
 </body>
 </html>
