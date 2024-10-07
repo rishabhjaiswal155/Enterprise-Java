@@ -18,5 +18,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public List<Employee> getAllEmployeeDetails() {
 		return empRep.findAll();
 	}
+	@Override
+	public Employee addEmployeeDetails(Employee emp) {
+		return empRep.save(emp);
+	}
 
 }

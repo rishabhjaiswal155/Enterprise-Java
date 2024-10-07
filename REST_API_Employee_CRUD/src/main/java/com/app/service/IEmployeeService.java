@@ -6,5 +6,6 @@ import com.app.entities.Employee;
 
 public interface IEmployeeService {
 	List<Employee> getAllEmployeeDetails();
+	Employee addEmployeeDetails(Employee emp);
 
 }
