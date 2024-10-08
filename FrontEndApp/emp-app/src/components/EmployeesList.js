@@ -49,12 +49,12 @@ const EmployeeList = () => {
           <thead className='thead-dark'>
             <tr>
               <th>Name</th>
-              {/* <th>Last Name</th>
-              <th>Email</th> */}
+              <th>Last Name</th>
+              <th>Email</th>
               <th>Location</th>
               <th>Department</th>
-              {/* <th>Join Date</th>
-              <th>Salary</th> */}
+              <th>Join Date</th>
+              <th>Salary</th>
               <th colSpan={3}>Actions</th>
             </tr>
           </thead>
@@ -62,12 +62,12 @@ const EmployeeList = () => {
             {employees.map((employee) => (
               <tr key={employee.id}>
                 <td>{employee.name}</td>
-                {/* <td>{employee.lastName}</td>
-                <td>{employee.email}</td> */}
+                <td>{employee.lastName}</td>
+                <td>{employee.email}</td>
                 <td>{employee.location}</td>
                 <td>{employee.department}</td>
-                {/* <td>{employee.joinDate}</td>
-                <td>{employee.salary}</td> */}
+                <td>{employee.joinDate}</td>
+                <td>{employee.salary}</td>
                 <td>
                   <Link
                     className='btn btn-info'

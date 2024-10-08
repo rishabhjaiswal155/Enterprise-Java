@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import employeeService from '../services/employee.service';
 
 const AddEmployee = () => {
-  const [firstName, setFirstname] = useState('');
+  const [name, setName] = useState('');
   const [lastName, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ const AddEmployee = () => {
     e.preventDefault();
 
     const employee = {
-      firstName,
+      name,
       lastName,
       email,
       password,
@@ -63,7 +63,7 @@ const AddEmployee = () => {
       employeeService
         .get(id)
         .then((employee) => {
-          setFirstname(employee.data.firstName);
+          setName(employee.data.name);
           setLastname(employee.data.lastName);
           setEmail(employee.data.email);
           setPassword(employee.data.password);
@@ -86,9 +86,9 @@ const AddEmployee = () => {
           <input
             type='text'
             className='form-control col-4'
-            id='firstName'
-            value={firstName}
-            onChange={(e) => setFirstname(e.target.value)}
+            id='name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder='Enter first name'
           />
         </div>
