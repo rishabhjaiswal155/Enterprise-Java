@@ -22,5 +22,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public Employee addEmployeeDetails(Employee emp) {
 		return empRep.save(emp);
 	}
+	@Override
+	public String deleteEmployeeDetails(Long empId) {
+		empRep.deleteById(empId);
+		return "Employee details deleted successfully! for Id "+empId;
+	}
 
 }
