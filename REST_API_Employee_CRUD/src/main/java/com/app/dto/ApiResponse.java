@@ -10,10 +10,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ErrorResponse {
+public class ApiResponse {
 	private LocalDateTime timestamp;
 	private String message;
-	public ErrorResponse(String message) {
+	public ApiResponse(String message) {
 		super();
 		this.message = message;
 		this.timestamp=LocalDateTime.now();
