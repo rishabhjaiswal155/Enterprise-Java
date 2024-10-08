@@ -34,8 +34,8 @@ public class Employee extends BaseEntity {
 	private String name;
 	@Column(length=20,unique=true)
 	@NotBlank(message="lastName is required")
-	@Min(value=4,message="lastName minimun chars must be 4")
-	@Max(value=20,message="lastName mximum chars must be 20")
+	//@Min(value=4,message="lastName minimun chars must be 4")
+	//@Max(value=20,message="lastName mximum chars must be 20")
 	private String lastName;
 	@Email(message="Email must be in required format")
 	private String email;
