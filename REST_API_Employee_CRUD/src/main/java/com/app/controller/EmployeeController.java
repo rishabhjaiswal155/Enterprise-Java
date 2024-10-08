@@ -2,6 +2,8 @@ package com.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> addEmployeeDetails(@RequestBody Employee emp) {
+	public ResponseEntity<?> addEmployeeDetails(@RequestBody @Valid Employee emp) {
 		System.out.println("in addEmployeeDetails() of "+getClass());
 		try {
 		return new ResponseEntity<>(empService.addEmployeeDetails(emp),HttpStatus.CREATED);
@@ -75,7 +77,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> updateEmployeeDetails(@RequestBody Employee emp){
+	public ResponseEntity<?> updateEmployeeDetails(@RequestBody @Valid Employee emp){
 		System.out.println("in updateEmployeeDetails() of "+getClass());
 		try {
 			return ResponseEntity.ok(empService.updateEmployeeDetails(emp));
