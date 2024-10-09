@@ -3,10 +3,13 @@ package com.app.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.ApiResponse;
 import com.app.entities.Employee;
 import com.app.service.IEmployeeService;
 
@@ -25,6 +27,7 @@ import com.app.service.IEmployeeService;
 @RequestMapping("/api/employees")
 
 @CrossOrigin(origins = "http://localhost:3000")
+@Validated
 public class EmployeeController {
 	
 	@Autowired
@@ -44,28 +47,28 @@ public class EmployeeController {
 	@PostMapping
 	public ResponseEntity<?> addEmployeeDetails(@RequestBody @Valid Employee emp) {
 		System.out.println("in addEmployeeDetails() of "+getClass());
-		try {
+//		try {
 		return new ResponseEntity<>(empService.addEmployeeDetails(emp),HttpStatus.CREATED);
-		}catch(RuntimeException e) {
-			System.out.println("got exception in addEmployeeDetails() of "+getClass());
-			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.BAD_REQUEST);
-		}
+//		}catch(RuntimeException e) {
+//			System.out.println("got exception in addEmployeeDetails() of "+getClass());
+//			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.BAD_REQUEST);
+//		}
 		}
 	
 	@DeleteMapping("/{empId}")
-	public ResponseEntity<?> deleteEmployeeDetails(@PathVariable Long empId){
+	public ResponseEntity<?> deleteEmployeeDetails(@PathVariable @Valid @Min(1) @Max(1000) Long empId){
 		System.out.println("in deleteEmployeeDetails() of "+getClass());
-		try {
+	//	try {
 			return ResponseEntity.ok(empService.deleteEmployeeDetails(empId));
-		}catch(RuntimeException e) {
-			System.out.println("got exception in deleteEmployeeDetails() of "+getClass());
-			return new ResponseEntity<>(new ApiResponse("Invalid EmployeeId!!!!"+empId),HttpStatus.NOT_FOUND);
-		}
+//		}catch(RuntimeException e) {
+//			System.out.println("got exception in deleteEmployeeDetails() of "+getClass());
+//			return new ResponseEntity<>(new ApiResponse("Invalid EmployeeId!!!!"+empId),HttpStatus.NOT_FOUND);
+//		}
 		
 	}
 	
 	@GetMapping("/{empId}")
-	public ResponseEntity<?> getEmployeeDetails(@PathVariable Long empId){
+	public ResponseEntity<?> getEmployeeDetails(@PathVariable @Valid @Min(1) @Max(1000) Long empId){
 		System.out.println("in getEmployeeDetails() of "+getClass());
 //		try {
 		//throw new RuntimeException("Something went wrong!!!");
@@ -80,12 +83,12 @@ public class EmployeeController {
 	@PutMapping
 	public ResponseEntity<?> updateEmployeeDetails(@RequestBody @Valid Employee emp){
 		System.out.println("in updateEmployeeDetails() of "+getClass());
-		try {
+		//try {
 			return ResponseEntity.ok(empService.updateEmployeeDetails(emp));
-		}catch(RuntimeException e) {
-			System.out.println("got exception in updateEmployeeDetails() of "+getClass());
-			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.NOT_FOUND);
-		}
+//		}catch(RuntimeException e) {
+//			System.out.println("got exception in updateEmployeeDetails() of "+getClass());
+//			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.NOT_FOUND);
+//		}
 	}
 	
 	
