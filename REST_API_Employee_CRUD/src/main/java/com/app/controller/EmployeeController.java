@@ -69,7 +69,7 @@ public class EmployeeController {
 		System.out.println("in getEmployeeDetails() of "+getClass());
 //		try {
 		//throw new RuntimeException("Something went wrong!!!");
-			return ResponseEntity.ok(empService.getEmployeeDetails(empId));
+		return ResponseEntity.ok(empService.getEmployeeDetails(empId));
 //		}catch(RuntimeException e) {
 //			System.out.println("got exception in getEmployeeDetails() of "+getClass());
 //			return new ResponseEntity<>(new ApiResponse("Invalid EmployeeId!!! id "+empId),HttpStatus.NOT_FOUND);

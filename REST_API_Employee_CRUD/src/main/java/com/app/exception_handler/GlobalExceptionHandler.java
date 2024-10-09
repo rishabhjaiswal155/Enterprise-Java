@@ -33,9 +33,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
 	}
 	
-//	@ExceptionHandler(RuntimeException.class)
-//	public ResponseEntity<?> handleRuntimeException(RuntimeException e){
-//		System.out.println("in handleRuntimeException() of "+getClass());
-//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
-//	}
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<?> handleRuntimeException(RuntimeException e){
+		System.out.println("in handleRuntimeException() of "+getClass());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
+	}
 }
