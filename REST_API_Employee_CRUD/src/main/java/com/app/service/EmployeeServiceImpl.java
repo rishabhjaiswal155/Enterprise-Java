@@ -2,12 +2,14 @@ package com.app.service;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.EmployeeRepository;
+import com.app.dto.EmployeeDto;
 import com.app.entities.Employee;
 @Service
 @Transactional
@@ -15,13 +17,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Autowired
 	private EmployeeRepository empRep;
+	
+	@Autowired
+	private ModelMapper mapper;
 	@Override
 	public List<Employee> getAllEmployeeDetails() {
 		return empRep.findAll();
 	}
 	@Override
-	public Employee addEmployeeDetails(Employee emp) {
-		return empRep.save(emp);
+	public EmployeeDto addEmployeeDetails(Employee emp) {
+		Employee employee= empRep.save(emp);
+		return mapper.map(employee,EmployeeDto.class);
 	}
 	@Override
 	public String deleteEmployeeDetails(Long empId) {
@@ -29,13 +35,16 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return "Employee details deleted successfully! for Id "+empId;
 	}
 	@Override
-	public Employee getEmployeeDetails(Long empId) {
-		return empRep.findById(empId).orElseThrow(()->new ResourceNotFoundException("Invalid Employee id!!"+empId));
+	public EmployeeDto getEmployeeDetails(Long empId) {
+		Employee emp=empRep.findById(empId).orElseThrow(()->new ResourceNotFoundException("Invalid Employee id!!"+empId));
+		return mapper.map(emp, EmployeeDto.class);
 		}
 	@Override
-	public Employee updateEmployeeDetails(Employee emp) {
-		if(empRep.existsById(emp.getId()))
-		   return empRep.save(emp);
+	public EmployeeDto updateEmployeeDetails(Employee emp) {
+		if(empRep.existsById(emp.getId())) {
+		   Employee employee= empRep.save(emp);
+		   return mapper.map(employee,EmployeeDto.class);
+		}
 		throw new ResourceNotFoundException("Invalid EmpID "+emp.getId()+"Updation failed!!!");
 	}
 
