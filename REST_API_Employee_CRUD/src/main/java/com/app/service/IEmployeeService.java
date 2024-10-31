@@ -7,9 +7,9 @@ import com.app.entities.Employee;
 
 public interface IEmployeeService {
 	List<Employee> getAllEmployeeDetails();
-	EmployeeDto addEmployeeDetails(Employee emp);
+	EmployeeDto addEmployeeDetails(EmployeeDto empDto);
 	String deleteEmployeeDetails(Long empId);
 	EmployeeDto getEmployeeDetails(Long empId);
-	EmployeeDto updateEmployeeDetails(Employee emp);
+	EmployeeDto updateEmployeeDetails(EmployeeDto empDto);
 
 }

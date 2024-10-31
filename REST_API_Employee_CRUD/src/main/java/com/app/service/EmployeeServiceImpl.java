@@ -25,9 +25,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return empRep.findAll();
 	}
 	@Override
-	public EmployeeDto addEmployeeDetails(Employee emp) {
-		Employee employee= empRep.save(emp);
-		return mapper.map(employee,EmployeeDto.class);
+	public EmployeeDto addEmployeeDetails(EmployeeDto empDto) {
+		Employee employee=mapper.map(empDto,Employee.class);
+		Employee employee1= empRep.save(employee);
+		return mapper.map(employee1,EmployeeDto.class);
 	}
 	@Override
 	public String deleteEmployeeDetails(Long empId) {
@@ -40,12 +41,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return mapper.map(emp, EmployeeDto.class);
 		}
 	@Override
-	public EmployeeDto updateEmployeeDetails(Employee emp) {
-		if(empRep.existsById(emp.getId())) {
-		   Employee employee= empRep.save(emp);
-		   return mapper.map(employee,EmployeeDto.class);
+	public EmployeeDto updateEmployeeDetails(EmployeeDto empDto) {
+		Employee employee=mapper.map(empDto,Employee.class);
+		if(empRep.existsById(employee.getId())) {
+		   Employee employee1= empRep.save(employee);
+		   return mapper.map(employee1,EmployeeDto.class);
 		}
-		throw new ResourceNotFoundException("Invalid EmpID "+emp.getId()+"Updation failed!!!");
+		throw new ResourceNotFoundException("Invalid EmpID "+employee.getId()+"Updation failed!!!");
 	}
 
 }

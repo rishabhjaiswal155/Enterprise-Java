@@ -23,6 +23,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class EmployeeDto{
+	private Long id;
 	@NotBlank(message = "firstName is required")
 	private String name;
 	@NotBlank(message="lastName is required")

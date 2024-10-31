@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.app.dto.EmployeeDto;
 import com.app.entities.Employee;
 import com.app.service.IEmployeeService;
 
@@ -44,10 +46,10 @@ public class EmployeeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> addEmployeeDetails(@RequestBody @Valid Employee emp) {
+	public ResponseEntity<?> addEmployeeDetails(@RequestBody @Valid EmployeeDto empDto) {
 		System.out.println("in addEmployeeDetails() of "+getClass());
 //		try {
-		return new ResponseEntity<>(empService.addEmployeeDetails(emp),HttpStatus.CREATED);
+		return new ResponseEntity<>(empService.addEmployeeDetails(empDto),HttpStatus.CREATED);
 //		}catch(RuntimeException e) {
 //			System.out.println("got exception in addEmployeeDetails() of "+getClass());
 //			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.BAD_REQUEST);
@@ -80,10 +82,10 @@ public class EmployeeController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> updateEmployeeDetails(@RequestBody @Valid Employee emp){
+	public ResponseEntity<?> updateEmployeeDetails(@RequestBody @Valid EmployeeDto empDto){
 		System.out.println("in updateEmployeeDetails() of "+getClass());
 		//try {
-			return ResponseEntity.ok(empService.updateEmployeeDetails(emp));
+			return ResponseEntity.ok(empService.updateEmployeeDetails(empDto));
 //		}catch(RuntimeException e) {
 //			System.out.println("got exception in updateEmployeeDetails() of "+getClass());
 //			return new ResponseEntity<>(new ApiResponse(e.getMessage()),HttpStatus.NOT_FOUND);
